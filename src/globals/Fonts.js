@@ -10,12 +10,12 @@ const fonts = SizeAndWeight => {
     FIRST: {
       ...Platform.select({
         android: {
-          fontFamily: 'IRANSansMobile',
+          fontFamily: 'IRANSansMobile(FaNum)',
           fontWeight: '300',
           fontSize: responsiveFontSize(1.5),
         },
         ios: {
-          fontFamily: 'IRANSansMobile',
+          fontFamily: 'IRANSansMobile(FaNum)',
           fontWeight: '300',
           fontSize: responsiveFontSize(1.5),
         },
@@ -24,12 +24,12 @@ const fonts = SizeAndWeight => {
     SECOND: {
       ...Platform.select({
         android: {
-          fontFamily: 'IRANSansMobile',
+          fontFamily: 'IRANSansMobile(FaNum)',
           fontWeight: '300',
           fontSize: responsiveFontSize(1.8),
         },
         ios: {
-          fontFamily: 'IRANSansMobile',
+          fontFamily: 'IRANSansMobile(FaNum)',
           fontWeight: '300',
           fontSize: responsiveFontSize(1.8),
         },
@@ -38,12 +38,12 @@ const fonts = SizeAndWeight => {
     Third: {
       ...Platform.select({
         android: {
-          fontFamily: 'IRANSansMobile',
+          fontFamily: 'IRANSansMobile(FaNum)',
           fontWeight: '800',
           fontSize: responsiveFontSize(2.1),
         },
         ios: {
-          fontFamily: 'IRANSansMobile',
+          fontFamily: 'IRANSansMobile(FaNum)',
           fontWeight: '800',
           fontSize: responsiveFontSize(2.1),
         },
@@ -52,12 +52,68 @@ const fonts = SizeAndWeight => {
     Forth: {
       ...Platform.select({
         android: {
-          fontFamily: 'IRANSansMobile',
+          fontFamily: 'IRANSansMobile(FaNum)',
           fontWeight: '900',
           fontSize: responsiveFontSize(2.4),
         },
         ios: {
-          fontFamily: 'IRANSansMobile',
+          fontFamily: 'IRANSansMobile(FaNum)',
+          fontWeight: '900',
+          fontSize: responsiveFontSize(2.4),
+        },
+      }),
+    },
+    NUMBERFIRST: {
+      ...Platform.select({
+        android: {
+          fontFamily: 'IRANSansMobile(FaNum)',
+          fontWeight: '300',
+          fontSize: responsiveFontSize(1.5),
+        },
+        ios: {
+          fontFamily: 'IRANSansMobile(FaNum)',
+          fontWeight: '300',
+          fontSize: responsiveFontSize(1.5),
+        },
+      }),
+    },
+    NUMBERSECOND: {
+      ...Platform.select({
+        android: {
+          fontFamily: 'IRANSansMobile(FaNum)',
+          fontWeight: '300',
+          fontSize: responsiveFontSize(1.8),
+        },
+        ios: {
+          fontFamily: 'IRANSansMobile(FaNum)',
+          fontWeight: '300',
+          fontSize: responsiveFontSize(1.8),
+        },
+      }),
+    },
+    NUMBERThird: {
+      ...Platform.select({
+        android: {
+          fontFamily: 'IRANSansMobile(FaNum)',
+          fontWeight: '800',
+          fontSize: responsiveFontSize(2.1),
+        },
+        ios: {
+          fontFamily: 'IRANSansMobile(FaNum)',
+          fontWeight: '800',
+          fontSize: responsiveFontSize(2.1),
+        },
+      }),
+    },
+    NUMBERForth: {
+      ...Platform.select({
+        android: {
+          fontFamily: 'IRANSansMobile(FaNum)',
+          fontWeight: '900',
+          fontSize: responsiveFontSize(2.4),
+        },
+        ios: {
+          fontFamily: 'IRANSansMobile(FaNum)',
           fontWeight: '900',
           fontSize: responsiveFontSize(2.4),
         },

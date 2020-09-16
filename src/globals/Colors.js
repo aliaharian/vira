@@ -12,7 +12,7 @@ const colors = theme => {
     GRAY_NINE: 'rgb(27,27,27)',
     GRAY_TEN: 'rgb(243,243,243)',
     BLACK: 'rgb(0,0,0)',
-    RED_ONE: 'rgb(219,48,34)',
+    RED_ONE: 'rgb(20,147,164)',
     RED_TWO: 'rgb(240,31,14)',
     YELLOW: 'rgb(255,186,73)',
     GREEN: 'rgb(42,169,82)',

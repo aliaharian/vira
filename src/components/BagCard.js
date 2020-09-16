@@ -12,7 +12,8 @@ class BagCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: 1,
+      counter: this.props.counter,
+      isArea: this.props.isArea,
     };
   }
 
@@ -54,7 +55,9 @@ class BagCard extends Component {
             fonts(this.global.locale).FIRST,
             {color: colors(this.global.theme).GRAY_EIGHT, textAlign: 'center'},
           ]}
-          onPress={this.hideMenu}>
+          onPress={() => {
+            this._menu.hide(this.props.onPressF);
+          }}>
           {strings(this.global.locale).AddToFavorites}
         </MenuItem>
         <MenuDivider color={colors(this.global.theme).GRAY_SIX} />
@@ -70,7 +73,7 @@ class BagCard extends Component {
             fonts(this.global.locale).FIRST,
             {color: colors(this.global.theme).GRAY_EIGHT, textAlign: 'center'},
           ]}
-          onPress={this.hideMenu}>
+          onPress={(this.hideMenu, this.props.onPressD)}>
           {strings(this.global.locale).DeleteFromThisList}
         </MenuItem>
       </Menu>
@@ -129,8 +132,8 @@ class BagCard extends Component {
                 {this.MenuDeleteOrFavorites()}
                 <Image
                   style={{
-                    width: responsiveHeight(4),
-                    height: responsiveHeight(4),
+                    width: responsiveHeight(3),
+                    height: responsiveHeight(3),
                     tintColor: colors(this.global.theme).GRAY_FOUR,
                     resizeMode: 'center',
                     marginTop: responsiveHeight(2),
@@ -141,7 +144,7 @@ class BagCard extends Component {
               {/*----------Name And Color----------*/}
               <View
                 style={{
-                  flex: 4,
+                  flex: 2,
                   alignSelf: 'stretch',
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -161,7 +164,9 @@ class BagCard extends Component {
                       },
                       fonts(this.global.SizeAndWeight).SECOND,
                     ]}>
-                    نام کالا
+                    {this.props.name.length > 20
+                      ? this.props.name.substring(0, 20) + '...'
+                      : this.props.name}
                   </Text>
                 </View>
                 <View
@@ -171,160 +176,75 @@ class BagCard extends Component {
                     justifyContent: 'flex-end',
                     alignItems: 'center',
                     flexDirection: 'row',
+                    marginRight: responsiveWidth(4),
                   }}>
+                  {this.state.isArea == true ? (
+                    <Text
+                      style={[
+                        {
+                          color: colors(this.global.theme).GRAY_EIGHT,
+                        },
+                        fonts(this.global.SizeAndWeight).FIRST,
+                      ]}>
+                      {' '}
+                      {strings(this.global.locale).SquareMeters}
+                    </Text>
+                  ) : (
+                    () => {}
+                  )}
                   <Text
                     style={[
                       {
-                        marginRight: responsiveWidth(1),
                         color: colors(this.global.theme).GRAY_EIGHT,
                       },
                       fonts(this.global.SizeAndWeight).FIRST,
                     ]}>
-                    مشکی
+                    {this.state.counter}
                   </Text>
                   <Text
                     style={[
                       {
-                        marginRight: responsiveWidth(4),
                         color: colors(this.global.theme).GRAY_SIX,
                       },
                       fonts(this.global.SizeAndWeight).FIRST,
                     ]}>
-                    {strings(this.global.locale).Color}:
+                    {this.state.isArea == true
+                      ? strings(this.global.locale).Area
+                      : strings(this.global.locale).Quantity}
+                    :{' '}
                   </Text>
                 </View>
               </View>
             </View>
-            {/*--------------------Others Bottom---------------------*/}
+            {/*----------Price-----------*/}
             <View
               style={{
-                flex: 1,
                 alignSelf: 'stretch',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 alignItems: 'center',
                 flexDirection: 'row',
+                marginVertical: responsiveHeight(1),
               }}>
-              {/*----------Price-----------*/}
-              <View
-                style={{
-                  height: responsiveHeight(8),
-                  width: responsiveWidth(32),
-                  justifyContent: 'flex-start',
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                }}>
-                <Text
-                  style={[
-                    {
-                      marginLeft: responsiveWidth(4),
-                      marginRight: responsiveWidth(1),
-                      color: colors(this.global.theme).GRAY_EIGHT,
-                    },
-                    fonts(this.global.SizeAndWeight).SECOND,
-                  ]}>
-                  {strings(this.global.locale).Dollar}
-                </Text>
-                <Text
-                  style={[
-                    {
-                      color: colors(this.global.theme).GRAY_EIGHT,
-                    },
-                    fonts(this.global.SizeAndWeight).SECOND,
-                  ]}>
-                  1500000
-                </Text>
-              </View>
-              {/*----------Counter----------*/}
-              <View
-                style={{
-                  flex: 1,
-                  alignSelf: 'stretch',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                }}>
-                {/*----------Minus----------*/}
-                <TouchableOpacity
-                  style={[
-                    {
-                      height: responsiveHeight(6),
-                      width: responsiveHeight(6),
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      backgroundColor: colors(this.global.theme).WHITE,
-                      borderRadius: 100,
-                    },
-                    elevations(this.global.shadow).FAVORITES,
-                  ]}
-                  onPress={() => {
-                    this.setState(prevState => ({
-                      counter:
-                        prevState.counter == 1 ? 1 : prevState.counter - 1,
-                    }));
-                  }}
-                  disabled={this.state.counter == 1}>
-                  <Image
-                    style={{
-                      width: undefined,
-                      height: undefined,
-                      flex: 1,
-                      alignSelf: 'stretch',
-                      margin: responsiveHeight(1.5),
-                      resizeMode: 'cover',
-                      tintColor: colors(this.global.theme).GRAY_SIX,
-                    }}
-                    source={require('../Image/28.png')}></Image>
-                </TouchableOpacity>
-                {/*----------Number----------*/}
-                <View
-                  style={{
-                    flex: 1,
-                    alignSelf: 'stretch',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Text
-                    style={[
-                      {
-                        color: colors(this.global.theme).GRAY_EIGHT,
-                      },
-                      fonts(this.global.SizeAndWeight).SECOND,
-                    ]}>
-                    {this.state.counter}
-                  </Text>
-                </View>
-                {/*----------Plus----------*/}
-                <TouchableOpacity
-                  style={[
-                    {
-                      height: responsiveHeight(6),
-                      width: responsiveHeight(6),
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      backgroundColor: colors(this.global.theme).WHITE,
-                      borderRadius: 100,
-                      marginRight: responsiveWidth(4),
-                    },
-                    elevations(this.global.shadow).FAVORITES,
-                  ]}
-                  onPress={() => {
-                    this.setState(prevState => ({
-                      counter: prevState.counter + 1,
-                    }));
-                  }}>
-                  <Image
-                    style={{
-                      width: undefined,
-                      height: undefined,
-                      flex: 1,
-                      alignSelf: 'stretch',
-                      margin: responsiveHeight(1.5),
-                      resizeMode: 'cover',
-                      tintColor: colors(this.global.theme).GRAY_SIX,
-                    }}
-                    source={require('../Image/27.png')}></Image>
-                </TouchableOpacity>
-              </View>
+              <Text
+                style={[
+                  {
+                    marginLeft: responsiveWidth(4),
+                    marginRight: responsiveWidth(1),
+                    color: colors(this.global.theme).GRAY_EIGHT,
+                  },
+                  fonts(this.global.SizeAndWeight).SECOND,
+                ]}>
+                {strings(this.global.locale).Dollar}
+              </Text>
+              <Text
+                style={[
+                  {
+                    color: colors(this.global.theme).GRAY_EIGHT,
+                  },
+                  fonts(this.global.SizeAndWeight).SECOND,
+                ]}>
+                {this.props.price}
+              </Text>
             </View>
           </View>
           {/*-------------------Image--------------------*/}
@@ -345,7 +265,7 @@ class BagCard extends Component {
                 borderTopRightRadius: responsiveWidth(3),
                 borderBottomRightRadius: responsiveWidth(3),
               }}
-              source={require('../Image/13.jpg')}></Image>
+              source={{uri: this.props.uri}}></Image>
           </View>
         </View>
         {/*-------------------Retaining View--------------------*/}

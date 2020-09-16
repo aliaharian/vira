@@ -12,7 +12,6 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
-import RBSheet from 'react-native-raw-bottom-sheet';
 import {colors, strings, elevations, fonts} from '../globals';
 import {Rating} from '../components';
 
@@ -54,10 +53,11 @@ class Comment extends Component {
               height: undefined,
               flex: 1,
               alignSelf: 'stretch',
-              tintColor: colors(this.global.theme).RED_ONE,
-              resizeMode: 'center',
+              //tintColor: colors(this.global.theme).RED_ONE,
+              resizeMode: 'cover',
+              borderRadius: 100,
             }}
-            source={this.props.userImage}></Image>
+            source={{uri: this.props.userImage}}></Image>
         </View>
         {/*--------------------Total Part--------------------*/}
         <View
@@ -128,7 +128,7 @@ class Comment extends Component {
                   {
                     color: colors(this.global.theme).GRAY_SIX,
                   },
-                  fonts(this.global.SizeAndWeight).FIRST,
+                  fonts(this.global.SizeAndWeight).NUMBERFIRST,
                 ]}>
                 {this.props.date}
               </Text>

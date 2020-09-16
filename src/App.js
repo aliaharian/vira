@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'reactn';
 import Router from './Router';
-import {Categories, Filter} from './screens';
 import {YellowBox} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 YellowBox.ignoreWarnings([
   'componentWillReceiveProps',
@@ -10,8 +10,21 @@ YellowBox.ignoreWarnings([
   'missing keys for',
   'VirtualizedLists should',
   'componentWillMount',
+  'Require cycle:',
+  'Failed prop type:',
+  `Can't perform a React state`,
+  'Failed child context type',
 ]);
+
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  componentDidMount() {
+    this.setGlobal({isSend: false});
+  }
+
   render() {
     return <Router></Router>;
   }

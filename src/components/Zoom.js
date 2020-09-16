@@ -10,6 +10,7 @@ import {
   TextInput,
   Keyboard,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import {
   responsiveHeight,
@@ -24,35 +25,13 @@ class Zoom extends Component {
     super(props);
     this.state = {
       isZoom: false,
-      witchIndex: this.global.witchPicture,
-      productImages: [
-        {
-          url:
-            'http://pakhsheiranian.com/image/cache/catalog/0%20Kashi/EEFA/service/EEFA-Ceram-Aysoo-abi-800x800.jpg',
-        },
-        {
-          url:
-            'http://pakhsheiranian.com/image/cache/catalog/0%20Kashi/EEFA/service/EEFA-Ceram-fiojen-veronica-800x800.jpg',
-        },
-        {
-          url:
-            'http://pakhsheiranian.com/image/cache/catalog/0%20Kashi/EEFA/service/EEFA-Ceram-eroos-800x800.jpg',
-        },
-        {
-          url:
-            'https://www.irex2world.com/files/260/product/CCkFvveG6WDHeAhaCdhd.jpg',
-        },
-        {
-          url:
-            'https://www.otag.ir/wp-content/uploads/%DA%A9%D8%A7%D8%B4%DB%8C-13.jpg',
-        },
-      ],
+      witchIndex: this.props.navigation.getParam('witchPicture'),
     };
   }
 
   render() {
     return (
-      <View
+      <SafeAreaView
         style={{
           flex: 1,
           alignSelf: 'stretch',
@@ -95,7 +74,7 @@ class Zoom extends Component {
                   fonts(this.global.SizeAndWeight).Third,
                 ]}>
                 {Number(this.state.witchIndex) + 1} از{' '}
-                {this.state.productImages.length}
+                {this.props.navigation.getParam('imageAddress').length}
               </Text>
             </View>
             {/*----------Header Text----------*/}
@@ -167,7 +146,7 @@ class Zoom extends Component {
                 alignSelf: 'stretch',
                 backgroundColor: colors(this.global.theme).GRAY_ONE,
               }}
-              data={this.state.productImages}
+              data={this.props.navigation.getParam('imageAddress')}
               renderItem={({item, index}) => {
                 return (
                   <TouchableOpacity
@@ -200,14 +179,16 @@ class Zoom extends Component {
                           resizeMode: 'contain',
                         }}
                         source={{
-                          uri: item.url,
+                          uri: item.src,
                         }}
                       />
                     </ImageZoom>
                   </TouchableOpacity>
                 );
               }}
-              initialScrollIndex={this.global.witchPicture}
+              initialScrollIndex={this.props.navigation.getParam(
+                'witchPicture',
+              )}
               horizontal
               inverted
               pagingEnabled
@@ -237,7 +218,7 @@ class Zoom extends Component {
                   alignSelf: 'stretch',
                   backgroundColor: colors(this.global.theme).GRAY_ONE,
                 }}
-                data={this.state.productImages}
+                data={this.props.navigation.getParam('imageAddress')}
                 renderItem={({item, index}) => {
                   return (
                     <TouchableOpacity
@@ -247,11 +228,15 @@ class Zoom extends Component {
                         justifyContent: 'center',
                         alignItems: 'center',
                         marginLeft:
-                          index == this.state.productImages.length - 1
+                          index ==
+                          this.props.navigation.getParam('imageAddress')
+                            .length -
+                            1
                             ? 0
                             : responsiveWidth(1),
                       }}
-                      activeOpacity={0.9}>
+                      activeOpacity={1}
+                      disabled={true}>
                       <Image
                         style={{
                           width: undefined,
@@ -260,7 +245,7 @@ class Zoom extends Component {
                           alignSelf: 'stretch',
                           resizeMode: 'cover',
                         }}
-                        source={{uri: item.url}}></Image>
+                        source={{uri: item.src}}></Image>
                       <View
                         style={{
                           height: responsiveHeight(1),
@@ -273,7 +258,9 @@ class Zoom extends Component {
                     </TouchableOpacity>
                   );
                 }}
-                initialScrollIndex={this.props.witchPicture}
+                initialScrollIndex={this.props.navigation.getParam(
+                  'witchPicture',
+                )}
                 inverted
                 horizontal
                 showsHorizontalScrollIndicator={false}></FlatList>
@@ -282,7 +269,7 @@ class Zoom extends Component {
             () => {}
           )}
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

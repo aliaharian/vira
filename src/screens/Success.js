@@ -5,11 +5,8 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
-  ScrollView,
-  FlatList,
-  TextInput,
-  Keyboard,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import {
   responsiveHeight,
@@ -26,7 +23,7 @@ class Success extends Component {
 
   render() {
     return (
-      <View
+      <SafeAreaView
         style={{
           flex: 1,
           alignSelf: 'stretch',
@@ -119,7 +116,9 @@ class Success extends Component {
               borderRadius: 100,
             }}
             //onPress: Empty the cart and go to Landing
-          >
+            onPress={() => {
+              this.props.navigation.navigate('_Landing');
+            }}>
             <Text
               style={[
                 {
@@ -132,7 +131,7 @@ class Success extends Component {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

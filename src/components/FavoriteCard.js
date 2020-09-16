@@ -12,9 +12,9 @@ class FavoriteCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isNew: true,
-      isSale: false,
-      isSoldOut: false,
+      isNew: this.props.isNew,
+      isSale: this.props.isSale,
+      isSoldOut: this.props.isSoldOut,
     };
   }
 
@@ -67,7 +67,8 @@ class FavoriteCard extends Component {
                   width: responsiveWidth(10),
                   justifyContent: 'flex-start',
                   alignItems: 'flex-start',
-                }}>
+                }}
+                onPress={this.props.onPressDelete}>
                 <Image
                   style={{
                     width: responsiveHeight(2.5),
@@ -102,7 +103,9 @@ class FavoriteCard extends Component {
                       },
                       fonts(this.global.SizeAndWeight).FIRST,
                     ]}>
-                    نام کالا
+                    {this.props.nameL > 20
+                      ? this.props.name.substring(0, 20) + '...'
+                      : this.props.name}
                   </Text>
                 </View>
                 <View
@@ -121,7 +124,7 @@ class FavoriteCard extends Component {
                       },
                       fonts(this.global.SizeAndWeight).SECOND,
                     ]}>
-                    دسته بندی
+                    {this.props.category}
                   </Text>
                 </View>
               </View>
@@ -161,7 +164,7 @@ class FavoriteCard extends Component {
                     },
                     fonts(this.global.SizeAndWeight).SECOND,
                   ]}>
-                  12000
+                  {this.props.price}
                 </Text>
               </View>
               {/*----------Color And Size----------*/}
@@ -173,13 +176,13 @@ class FavoriteCard extends Component {
                   alignItems: 'center',
                   flexDirection: 'row',
                   paddingLeft: responsiveHeight(6) + responsiveWidth(4),
-                  paddingRight: responsiveWidth(20),
+                  paddingRight: responsiveWidth(16),
                 }}>
                 <Rating
                   disable={true}
-                  isNumber={true}
-                  numberOfComments={10}
-                  rating={3}
+                  isNumber={false}
+                  numberOfComments={this.props.countRates}
+                  rating={this.props.rates}
                 />
               </View>
             </View>
@@ -202,14 +205,14 @@ class FavoriteCard extends Component {
                 borderTopRightRadius: responsiveWidth(3),
                 borderBottomRightRadius: responsiveWidth(3),
               }}
-              source={require('../Image/13.jpg')}></Image>
+              source={{uri: this.props.uri}}></Image>
           </View>
           {/*--------------------label: New--------------------*/}
           {this.state.isNew == true ? (
             <View
               style={[
                 {
-                  width: responsiveHeight(8),
+                  width: responsiveHeight(10),
                   height: responsiveHeight(5),
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -225,7 +228,7 @@ class FavoriteCard extends Component {
                   {
                     color: colors(this.global.theme).WHITE,
                   },
-                  fonts(this.global.SizeAndWeight).SECOND,
+                  fonts(this.global.SizeAndWeight).FIRST,
                 ]}>
                 {strings(this.global.locale).New}
               </Text>
@@ -238,11 +241,11 @@ class FavoriteCard extends Component {
             <View
               style={[
                 {
-                  width: responsiveHeight(8),
+                  width: responsiveHeight(10),
                   height: responsiveHeight(5),
                   alignItems: 'center',
                   justifyContent: 'center',
-                  backgroundColor: colors(this.global.theme).RED_ONE,
+                  backgroundColor: colors(this.global.theme).RED_TWO,
                   borderRadius: 100,
                   position: 'absolute',
                   top: responsiveHeight(1),
@@ -254,9 +257,9 @@ class FavoriteCard extends Component {
                   {
                     color: colors(this.global.theme).WHITE,
                   },
-                  fonts(this.global.SizeAndWeight).SECOND,
+                  fonts(this.global.SizeAndWeight).FIRST,
                 ]}>
-                -{this.props.salePercent}%
+                {strings(this.global.locale).Discounted}
               </Text>
             </View>
           ) : (
@@ -279,7 +282,8 @@ class FavoriteCard extends Component {
               },
               elevations(this.global.shadow).FAVORITES,
             ]}
-            activeOpacity={0.9}>
+            activeOpacity={0.9}
+            onPress={this.props.onPressAddToBag}>
             <Image
               style={{
                 width: undefined,
